@@ -42,7 +42,6 @@ int _printf(const char *format, ...)
 	}
 	va_end(conv);
 	i -= count;
-	write(1, format, i);
-	printf("\ni = %i\ncount = %i\n", i, count);
+	printf("i = %i\ncount = %i\n", i, count);
 	return (i);
 }
