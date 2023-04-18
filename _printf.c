@@ -15,17 +15,25 @@ int _printf(const char *format, ...)
 {
 	va_list conv;
 	int i, j, k;
-	char *p;
+	char *p, c;
 	
 	va_start(conv, format);
-	for (i = 0, j = 0; format[j]; j++)
+	for (i = 0, j = 0, k = 0; format[j]; j++)
 	{
-		if (format[j] == '%' &&
-				(format[j + 1] == 'c' || format[j + 1] == 's'))
+		if (_conv_flag(format, j))
 		{
-			p = va_arg(conv, char *);
-			k = _strlen(p);
-			write(1, p, k);
+			if (format[j + 1] == 'c')
+			{
+				c = va_arg(conv, int);
+				write(1, &c, 1);
+				k = 1;
+			}
+			else
+			{
+				p = va_arg(conv, char *);
+				k = _strlen(p);
+				write(1, p, k);
+			}
 			j++;
 			i += k;
 		}
@@ -54,18 +62,13 @@ int _strlen(const char *s)
 		;
 	return (i);
 }
-/*
-void _case_count(const char *s, int *i, int *count)
-{
-	*i = 0, *count = 0;
-	for (; s[*i]; (*i)++)
-	{
-		if ((s[*i] == '%') && (s[*i + 1] != 'c' ||
-					s[*i + 1] != 's' ||
-					s[*i + 1] != 'd' ||
-					s[*i + 1] != 'i'))
-			(*count)++;
-	}
 
+int _conv_flag(const char *s, int j)
+{
+	if ((s[j] == '%') && (s[j + 1] == 'c' ||
+				s[j + 1] == 's' ||
+				s[j + 1] == 'd' ||
+				s[j + 1] == 'i'))
+		return (1);
+	return (0);
 }
-*/
