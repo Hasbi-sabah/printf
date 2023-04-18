@@ -14,51 +14,58 @@
 int _printf(const char *format, ...)
 {
 	va_list conv;
-	int i, j, k, count;
+	int i, j, k;
 	char *p;
-
-	for (i = 0, count = 0; format[i]; i++)
-	{
-		if (format[i] == '%')
-		{
-			switch (format[i + 1])
-			{
-				case 'c':
-					count++;
-					break;
-				case 's':
-					count++;
-					break;
-			}
-		}
-	}
+	
 	va_start(conv, format);
-	for (j = 0; j < count; j++)
-	{
-		p = va_arg(conv, char *);
-		for (k = 0; p[k]; k++)
-			i++;
-		i--;
-	}
-	va_end(conv);
-	i -= count;
-	va_start(conv, format);
-	for (j = 0; format[j]; j++)
+	for (i = 0, j = 0; format[j]; j++)
 	{
 		if (format[j] == '%' &&
 				(format[j + 1] == 'c' || format[j + 1] == 's'))
 		{
 			p = va_arg(conv, char *);
-			for (k = 0; p[k]; k++)
-				;
+			k = _strlen(p);
 			write(1, p, k);
 			j++;
+			i += k;
 		}
 		else
 		{
 			write(1, &format[j], 1);
+			i++;
 		}
 	}
 	va_end(conv);
+	printf("%i\n", i);
 	return (i);
 }
+
+/**
+ * _strlen - swaps the values of two integers.
+ *@s: string
+ * Return: length
+ */
+
+int _strlen(const char *s)
+{
+	int i;
+
+	for (i = 0; s[i]; i++)
+		;
+	return (i);
+}
+/*
+void _case_count(const char *s, int *i, int *count)
+{
+	*i = 0, *count = 0;
+	for (; s[*i]; (*i)++)
+	{
+		if ((s[*i] == '%') && (s[*i + 1] != 'c' ||
+					s[*i + 1] != 's' ||
+					s[*i + 1] != 'd' ||
+					s[*i + 1] != 'i'))
+			(*count)++;
+	}
+
+}
+*/
