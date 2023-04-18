@@ -13,7 +13,9 @@
 
 int _printf(const char *format, ...)
 {
-	int i, count;
+	va_list conv;
+	int i, j, k, count;
+	char *p;
 
 	for (i = 0, count = 0; format[i]; i++)
 	{
@@ -30,6 +32,15 @@ int _printf(const char *format, ...)
 			}
 		}
 	}
+	va_start(conv, format);
+	for (j = 0; j < count; j++)
+	{
+		p = va_arg(conv, char *);
+		for (k = 0; p[k]; k++)
+			i++;
+		i--;
+	}
+	va_end(conv);
 	i -= count;
 	write(1, format, i);
 	printf("\ni = %i\ncount = %i\n", i, count);
