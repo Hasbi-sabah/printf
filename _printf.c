@@ -42,6 +42,23 @@ int _printf(const char *format, ...)
 	}
 	va_end(conv);
 	i -= count;
-	printf("i = %i\ncount = %i\n", i, count);
+	va_start(conv, format);
+	for (j = 0; format[j]; j++)
+	{
+		if (format[j] == '%' &&
+				(format[j + 1] == 'c' || format[j + 1] == 's'))
+		{
+			p = va_arg(conv, char *);
+			for (k = 0; p[k]; k++)
+				;
+			write(1, p, k);
+			j++;
+		}
+		else
+		{
+			write(1, &format[j], 1);
+		}
+	}
+	va_end(conv);
 	return (i);
 }
