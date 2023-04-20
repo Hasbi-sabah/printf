@@ -37,7 +37,7 @@ int conv_s(va_list conv)
 int conv_i_d(va_list conv)
 {
 	int i = va_arg(conv, int);
-	int b, c, len;
+	int b, c = 0, len;
 	char *p;
 
 	if (i == 0)
@@ -48,11 +48,12 @@ int conv_i_d(va_list conv)
 	if (i < 0)
 	{
 		i = -i;
+		c = 1;
 		write(1, "-", 1);
 	}
 	for (len = 0, b = i; b > 0; len++)
 		b /= 10;
-	c = len;
+	c += len;
 	p = malloc(sizeof(int) * (len + 1));
 	for (len--; i > 0; len--)
 	{

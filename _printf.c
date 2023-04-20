@@ -16,8 +16,7 @@ int _printf(const char *format, ...)
 		{'i', conv_i_d},
 		{'d', conv_i_d}
 	};
-	int i, j, k, a, b, l;
-	char *p, c;
+	int i, j, k, a;
 
 	va_start(conv, format);
 	for (i = 0, j = 0, k = 0; format[j]; j++)
@@ -27,7 +26,7 @@ int _printf(const char *format, ...)
 			for (a = 0; conversion[a].conv_spec; a++)
 			{
 				if (conversion[a].conv_spec == format[j + 1])
-					conversion[a].f(conv);
+					k = conversion[a].f(conv);
 			}
 			j++;
 			i += k;
@@ -39,6 +38,7 @@ int _printf(const char *format, ...)
 		}
 	}
 	va_end(conv);
+	printf("%d\n", i);
 	return (i);
 }
 
