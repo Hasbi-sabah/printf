@@ -16,17 +16,26 @@ int _printf(const char *format, ...)
 		{'i', conv_i_d},
 		{'d', conv_i_d}
 	};
-	int i, j, k, a;
+	int i, j, k, a, flag;
 
 	va_start(conv, format);
 	for (i = 0, j = 0, k = 0; format[j]; j++)
 	{
 		if (format[j] == '%')
 		{
-			for (a = 0; conversion[a].conv_spec; a++)
+			for (a = 0, flag = 0; conversion[a].conv_spec; a++)
 			{
 				if (conversion[a].conv_spec == format[j + 1])
+				{
+					flag = 1;
 					k = conversion[a].f(conv);
+				}
+			}
+			if (flag != 1)
+			{
+				write(1, &format[j], 1);
+				j--;
+				k++;
 			}
 			j++;
 			i += k;
