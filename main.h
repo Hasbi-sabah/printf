@@ -23,5 +23,10 @@ int _conv_flag(const char *s, int j);
 int conv_c(va_list conv);
 int conv_s(va_list conv);
 int conv_i_d(va_list conv);
+int conv_b(va_list conv);
+int conv_u(va_list conv);
+int conv_o(va_list conv);
+int conv_x(va_list conv);
+int conv_X(va_list conv);
 
 #endif

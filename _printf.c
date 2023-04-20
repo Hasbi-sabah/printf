@@ -14,7 +14,12 @@ int _printf(const char *format, ...)
 		{'c', conv_c},
 		{'s', conv_s},
 		{'i', conv_i_d},
-		{'d', conv_i_d}
+		{'d', conv_i_d},
+		{'b', conv_b},
+		{'u', conv_u},
+		{'o', conv_o},
+		{'x', conv_x},
+		{'X', conv_X}
 	};
 	int i, j, k, a, flag;
 
