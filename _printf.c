@@ -19,40 +19,44 @@ int _printf(const char *format, ...)
 		{'u', conv_u},
 		{'o', conv_o},
 		{'x', conv_x},
-		{'X', conv_X}
+		{'X', conv_X},
+		{'S', conv_S},
+		{'p', conv_p}
 	};
-	int i, j, k, a, flag;
+	int i, j, a, flag;
+	char buff[1024];
 
 	va_start(conv, format);
-	for (i = 0, j = 0, k = 0; format[j]; j++)
+	for (i = 0, j = 0; format[j]; j++)
 	{
-		if (format[j] == '%')
+		if (format[j] == '%' && flag != 2)
 		{
 			for (a = 0, flag = 0; conversion[a].conv_spec; a++)
 			{
 				if (conversion[a].conv_spec == format[j + 1])
 				{
 					flag = 1;
-					k = conversion[a].f(conv);
+					i = conversion[a].f(conv, buff, i);
 				}
 			}
 			if (flag != 1)
 			{
-				write(1, &format[j], 1);
-				j--;
-				k++;
+				j -= 2;
+				buff[i] = format[j];
+				flag = 2;
 			}
 			j++;
-			i += k;
 		}
 		else
 		{
-			write(1, &format[j], 1);
+			buff[i] = format[j];
 			i++;
+			flag = 0;
 		}
 	}
 	va_end(conv);
-	printf("%d\n", i);
+	buff[i] = '\0';
+	write(1, buff, i);
 	return (i);
 }
 
@@ -86,4 +90,56 @@ int _conv_flag(const char *s, int j)
 				s[j + 1] == 'i'))
 		return (1);
 	return (0);
+}
+
+/**
+ * _strcpy - copies the string pointed to by src to dest
+ *
+ *@src: string
+ *@dest: buffer
+ * Return: string
+ */
+
+int _strcpy(char *dest, char *src, int i)
+{
+	int j;
+
+	for (j = 0; src[j] != '\0'; j++, i++)
+		dest[i] = src[j];
+	return (i);
+}
+
+/**
+ * _strrev - copies and reverses a string
+ *
+ *@src: string
+ *@dest: buffer
+ * Return: string
+ */
+
+int _strrev(char *dest, char *src, int i, int j)
+{
+	for (; j > 0; j--, i++)
+		dest[i] = src[j - 1];
+	return (i);
+}
+/**
+ * _strcat - concatenates two strings
+ *
+ *@src: first string
+ *@dest: second string
+ *
+ *Return: dest string
+ */
+
+void _strcat(char *dest, char *src, int i)
+{
+	int j, k, l;
+	
+	j = _strlen(dest);
+	k = _strlen(src);
+	for (l = j - 1; l > i; l--)
+		dest[l + k - 1] = dest[l];
+	for (l = 0; l < k; l++)
+		dest[i + l] = src[l];
 }
