@@ -27,6 +27,8 @@ int _printf(const char *format, ...)
 	int i;
 	char buff[1024];
 
+	if (format == NULL)
+		return (-1);
 	va_start(conv, format);
 	i = call_funcs(conversion, conv, format, buff);
 	va_end(conv);
