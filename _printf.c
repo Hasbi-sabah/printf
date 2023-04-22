@@ -27,7 +27,7 @@ int _printf(const char *format, ...)
 	int i;
 	char buff[1024];
 
-	if (format == NULL)
+	if (!format)
 		return (-1);
 	va_start(conv, format);
 	i = call_funcs(conversion, conv, format, buff);
@@ -76,6 +76,7 @@ int call_funcs(conv_list *conversion,
 			if (flag != 1)
 			{
 				buff[i++] = format[--j];
+				j--;
 				flag = 2;
 			}
 			j++;
