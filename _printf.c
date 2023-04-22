@@ -32,8 +32,6 @@ int _printf(const char *format, ...)
 	va_start(conv, format);
 	i = call_funcs(conversion, conv, format, buff);
 	va_end(conv);
-	if (!*buff)
-		return (0);
 	write(1, buff, i);
 	return (i);
 }
