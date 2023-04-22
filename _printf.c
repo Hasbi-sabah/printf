@@ -21,8 +21,7 @@ int _printf(const char *format, ...)
 		{'x', conv_x},
 		{'X', conv_X},
 		{'S', conv_S},
-		{'p', conv_p},
-		{'\0', NULL}
+		{'p', conv_p}
 	};
 	int i;
 	char buff[1024];
@@ -76,8 +75,7 @@ int call_funcs(conv_list *conversion,
 			if (flag != 1)
 			{
 				buff[i++] = format[--j];
-				j--;
-				flag = 2;
+				j--, flag = 2;
 			}
 			j++;
 		}
