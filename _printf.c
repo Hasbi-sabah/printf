@@ -30,9 +30,6 @@ int _printf(const char *format, ...)
 	if (format == NULL)
 		return (-1);
 	va_start(conv, format);
-	i = _strlen(format);
-	if (i <= 0)
-		return (0);
 	i = call_funcs(conversion, conv, format, buff);
 	va_end(conv);
 	buff[i] = '\0';
