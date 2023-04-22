@@ -28,16 +28,11 @@ int conv_c(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 
 int conv_s(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 {
-	char *p = va_arg(conv, char *);
+	char *p = va_arg(conv, char *), s[] = "(null)";
 
 	if (!p)
 	{
-		buff[i++] = '(';
-		buff[i++] = 'n';
-		buff[i++] = 'u';
-		buff[i++] = 'l';
-		buff[i++] = 'l';
-		buff[i++] = ')';
+		i = _strcpy(buff, s, i);
 		return (i);
 	}
 	i = _strcpy(buff, p, i);
