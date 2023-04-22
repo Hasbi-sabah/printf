@@ -48,7 +48,7 @@ int _printf(const char *format, ...)
 int call_funcs(conv_list *conversion,
 		va_list conv, const char *format, char *buff)
 {
-	int i, j, a, flag = 0;
+	int i, j, a, flag;
 	char mod_flag = 0;
 
 	for (i = 0, j = 0; format[j]; j++)
