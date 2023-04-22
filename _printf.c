@@ -88,7 +88,7 @@ int call_funcs(conv_list *conversion,
 }
 /**
  * _conv_flag - checks for conversion specifiers
- * @s: string
+ * @s: string to check
  * @j: string index
  * Return: 1 if match, 0 is not
  */
