@@ -21,7 +21,8 @@ int _printf(const char *format, ...)
 		{'x', conv_x},
 		{'X', conv_X},
 		{'S', conv_S},
-		{'p', conv_p}
+		{'p', conv_p},
+		{'\0', NULL}
 	};
 	int i;
 	char buff[1024];
@@ -53,6 +54,11 @@ int call_funcs(conv_list *conversion,
 		{
 			for (a = 0, flag = 0; conversion[a].conv_spec; a++)
 			{
+				if (format[j + 1] == '%')
+				{
+					buff[i++] = '%', flag = 1;
+					break;
+				}
 				if (conversion[a].conv_spec == format[j + 1])
 				{
 					flag = 1;
@@ -61,23 +67,20 @@ int call_funcs(conv_list *conversion,
 				}
 				if (_conv_flag(format, j))
 				{
-					mod_flag = format[j + 1];
-					j++;
+					mod_flag = format[++j];
 					a--;
 				}
 			}
 			if (flag != 1)
 			{
-				j -= 2;
-				buff[i] = format[j];
+				buff[i++] = format[--j];
 				flag = 2;
 			}
 			j++;
 		}
 		else
 		{
-			buff[i] = format[j];
-			i++;
+			buff[i++] = format[j];
 			flag = 0;
 		}
 	}
