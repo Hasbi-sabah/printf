@@ -6,7 +6,7 @@
  * Return: length of write
  */
 
-int conv_c(va_list conv, char *buff, int i)
+int conv_c(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 {
 	char c = va_arg(conv, int);
 
@@ -20,7 +20,7 @@ int conv_c(va_list conv, char *buff, int i)
  * Return: length of write
  */
 
-int conv_s(va_list conv, char *buff, int i)
+int conv_s(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 {
 	char *p = va_arg(conv, char *);
 
@@ -34,11 +34,13 @@ int conv_s(va_list conv, char *buff, int i)
  * Return: length of write
  */
 
-int conv_i_d(va_list conv, char *buff, int i)
+int conv_i_d(va_list conv, char *buff, int i, char f)
 {
 	int j = va_arg(conv, int), k;
 	char temp[20];
 	
+	if ((f == ' ' || f == '+') && j >= 0)
+		buff[i++] = f;
 	if (j == 0)
 		buff[i++] = '0';
 	if (j < 0)
@@ -59,7 +61,7 @@ int conv_i_d(va_list conv, char *buff, int i)
  * @conv: arg
  * Return: length of write
  */
-int conv_b(va_list conv, char *buff, int i)
+int conv_b(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 {
 	unsigned int j = va_arg(conv, unsigned int), k;
 	char temp[65];
@@ -81,11 +83,13 @@ int conv_b(va_list conv, char *buff, int i)
  * Return: length of write
  */
 
-int conv_u(va_list conv, char *buff, int i)
+int conv_u(va_list conv, char *buff, int i, char f)
 {
 	unsigned int j = va_arg(conv, unsigned int), k;
 	char temp[20];
 
+	if (f == ' ' || f == '+')
+		buff[i++] = f;
 	if (j == 0)
 		buff[i++] = '0';
 	for (k = 0; j > 0; k++)
@@ -101,11 +105,13 @@ int conv_u(va_list conv, char *buff, int i)
  * @conv: arg
  * Return: length of write
  */
-int conv_o(va_list conv, char *buff, int i)
+int conv_o(va_list conv, char *buff, int i, char f)
 {
 	unsigned int j = va_arg(conv, unsigned int), k;
 	char temp[12];
 	
+	if (f == ' ' || f == '+')
+		buff[i++] = f;
 	if (j == 0)
 		buff[i++] = '0';
 	for (k = 0; j > 0; k++)
@@ -121,11 +127,16 @@ int conv_o(va_list conv, char *buff, int i)
  * @conv: arg
  * Return: length of write
  */
-int conv_x(va_list conv, char *buff, int i)
+int conv_x(va_list conv, char *buff, int i, char f)
 {
 	unsigned int j = va_arg(conv, unsigned int), k;
 	char temp[12];
-	
+
+	if (f == '#')
+	{
+		buff[i++] = '0';
+		buff[i++] = 'x';
+	}
 	if (j == 0)
 		buff[i++] = '0';
 	for (k = 0; j > 0; k++)
@@ -145,11 +156,16 @@ int conv_x(va_list conv, char *buff, int i)
  * @conv: arg
  * Return: length of write
  */
-int conv_X(va_list conv, char *buff, int i)
+int conv_X(va_list conv, char *buff, int i, char f)
 {
 	unsigned int j = va_arg(conv, unsigned int), k;
 	char temp[12];
 
+	if (f == '#')
+	{
+		buff[i++] = '0';
+		buff[i++] = 'x';
+	}
 	if (j == 0)
 		buff[i++] = '0';
 	for (k = 0; j > 0; k++)
@@ -169,7 +185,7 @@ int conv_X(va_list conv, char *buff, int i)
  * @conv: arg
  * Return: length of write
  */
-int conv_S(va_list conv, char *buff, int i)
+int conv_S(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 {
 	char *p = va_arg(conv, char *), *p_x, temp[] = "\\x00";
 	int j, k, l;
@@ -202,7 +218,7 @@ int conv_S(va_list conv, char *buff, int i)
  * @conv: arg
  * Return: length of write
  */
-int conv_p(va_list conv, char *buff, int i)
+int conv_p(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 {
 	unsigned long int j = va_arg(conv, unsigned long int);
 	int k;

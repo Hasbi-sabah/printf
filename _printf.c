@@ -24,7 +24,7 @@ int _printf(const char *format, ...)
 		{'p', conv_p}
 	};
 	int i, j, a, flag;
-	char buff[1024];
+	char buff[1024], mod_flag = 0;
 
 	va_start(conv, format);
 	for (i = 0, j = 0; format[j]; j++)
@@ -36,7 +36,14 @@ int _printf(const char *format, ...)
 				if (conversion[a].conv_spec == format[j + 1])
 				{
 					flag = 1;
-					i = conversion[a].f(conv, buff, i);
+					i = conversion[a].f(conv, buff, i, mod_flag);
+					mod_flag = 0;
+				}
+				if (_conv_flag(format, j))
+				{
+					mod_flag = format[j + 1];
+					j++;
+					a--;
 				}
 			}
 			if (flag != 1)
@@ -84,10 +91,8 @@ int _strlen(const char *s)
 
 int _conv_flag(const char *s, int j)
 {
-	if ((s[j] == '%') && (s[j + 1] == 'c' ||
-				s[j + 1] == 's' ||
-				s[j + 1] == 'd' ||
-				s[j + 1] == 'i'))
+	if (s[j + 1] == '#'|| s[j + 1] == '+' ||
+			s[j + 1] == ' ')
 		return (1);
 	return (0);
 }
