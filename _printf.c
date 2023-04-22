@@ -10,7 +10,7 @@
 int _printf(const char *format, ...)
 {
 	va_list conv;
-	struct conversion conversion[] = {
+	conv_list conversion[] = {
 		{'c', conv_c},
 		{'s', conv_s},
 		{'i', conv_i_d},
@@ -23,10 +23,30 @@ int _printf(const char *format, ...)
 		{'S', conv_S},
 		{'p', conv_p}
 	};
-	int i, j, a, flag;
-	char buff[1024], mod_flag = 0;
+	int i;
+	char buff[1024];
 
 	va_start(conv, format);
+	i = call_funcs(conversion, conv, format, buff);
+	va_end(conv);
+	buff[i] = '\0';
+	write(1, buff, i);
+	return (i);
+}
+/**
+ * call_funcs - calls function for _printf
+ * @conversion: struct list
+ * @conv: va list
+ * @format: what's to be printed
+ * @buff: buffer
+ * Return: int
+ */
+int call_funcs(conv_list *conversion,
+		va_list conv, const char *format, char *buff)
+{
+	int i, j, a, flag;
+	char mod_flag = 0;
+
 	for (i = 0, j = 0; format[j]; j++)
 	{
 		if (format[j] == '%' && flag != 2)
@@ -61,27 +81,8 @@ int _printf(const char *format, ...)
 			flag = 0;
 		}
 	}
-	va_end(conv);
-	buff[i] = '\0';
-	write(1, buff, i);
 	return (i);
 }
-
-/**
- * _strlen - return length of s
- *@s: string
- * Return: length
- */
-
-int _strlen(const char *s)
-{
-	int i;
-
-	for (i = 0; s[i]; i++)
-		;
-	return (i);
-}
-
 /**
  * _conv_flag - checks for conversion specifiers
  * @s: string
@@ -91,60 +92,10 @@ int _strlen(const char *s)
 
 int _conv_flag(const char *s, int j)
 {
-	if (s[j + 1] == '#'|| s[j + 1] == '+' ||
+	if (s[j + 1] == '#' || s[j + 1] == '+' ||
 			s[j + 1] == ' ')
 		return (1);
 	return (0);
 }
 
-/**
- * _strcpy - copies the string pointed to by src to dest
- *
- *@src: string
- *@dest: buffer
- * Return: string
- */
 
-int _strcpy(char *dest, char *src, int i)
-{
-	int j;
-
-	for (j = 0; src[j] != '\0'; j++, i++)
-		dest[i] = src[j];
-	return (i);
-}
-
-/**
- * _strrev - copies and reverses a string
- *
- *@src: string
- *@dest: buffer
- * Return: string
- */
-
-int _strrev(char *dest, char *src, int i, int j)
-{
-	for (; j > 0; j--, i++)
-		dest[i] = src[j - 1];
-	return (i);
-}
-/**
- * _strcat - concatenates two strings
- *
- *@src: first string
- *@dest: second string
- *
- *Return: dest string
- */
-
-void _strcat(char *dest, char *src, int i)
-{
-	int j, k, l;
-	
-	j = _strlen(dest);
-	k = _strlen(src);
-	for (l = j - 1; l > i; l--)
-		dest[l + k - 1] = dest[l];
-	for (l = 0; l < k; l++)
-		dest[i + l] = src[l];
-}

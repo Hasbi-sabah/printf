@@ -16,8 +16,10 @@ struct conversion
 	char conv_spec;
 	int (*f)(va_list, char*, int, char);
 };
-
+typedef struct conversion conv_list;
 int _printf(const char *format, ...);
+int call_funcs(conv_list *conversion,
+		va_list conv, const char *format, char *buff);
 int _strlen(const char *s);
 int _strcpy(char *dest, char *src, int i);
 int _strrev(char *dest, char *src, int i, int j);
