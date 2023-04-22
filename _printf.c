@@ -21,7 +21,8 @@ int _printf(const char *format, ...)
 		{'x', conv_x},
 		{'X', conv_X},
 		{'S', conv_S},
-		{'p', conv_p}
+		{'p', conv_p},
+		{'\0', NULL}
 	};
 	int i;
 	char buff[1024];
