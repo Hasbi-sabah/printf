@@ -13,7 +13,6 @@ int _printf(const char *format, ...)
 	conv_list conversion[] = {
 		{'c', conv_c},
 		{'s', conv_s},
-		{'%', conv_percent},
 		{'i', conv_i_d},
 		{'d', conv_i_d},
 		{'b', conv_b},
