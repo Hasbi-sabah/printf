@@ -46,63 +46,42 @@ int _printf(const char *format, ...)
 int call_funcs(conv_list *conversion,
 		va_list conv, const char *format, char *buff)
 {
-	int i, j;
+	int i, j, a, flag;
+	char mod_flag = 0;
 
 	for (i = 0, j = 0; format[j]; j++)
 	{
-		if (format_checker(format, &i, &j, conv, buff, conversion) == -1)
-			return (-1);
+		if (format[j] == '%' && flag != 2)
+		{
+			for (a = 0, flag = 0; conversion[a].conv_spec; a++)
+			{
+				if (format[j + 1] == '\0')
+					return (-1);
+				if (format[j + 1] == '%')
+				{
+					buff[i++] = '%', flag = 1;
+					break;
+				}
+				if (conversion[a].conv_spec == format[j + 1])
+				{
+					flag = 1;
+					i = conversion[a].f(conv, buff, i, mod_flag);
+					mod_flag = 0;
+				}
+				if (_conv_flag(format, j))
+					mod_flag = format[++j], a--;
+			}
+			if (flag != 1)
+				buff[i] = format[--j], j--, flag = 2;
+			j++;
+		}
+		else
+		{
+			buff[i++] = format[j];
+			flag = 0;
+		}
 	}
 	return (i);
-}
-/**
- * format_checker - checks the format str
- * @conversion: struct list
- * @conv: va list
- * @format: what's to be printed
- * @buff: buffer
- * @i: index
- * @j: index
- * Return: int
- */
-int format_checker(const char *format, int *i, int *j,
-		va_list conv, char *buff, conv_list *conversion)
-{
-	int flag = 0, a;
-	char mod_flag = 0;
-
-	if (format[*j] == '%' && flag != 2)
-	{
-		for (a = 0, flag = 0; conversion[a].conv_spec; a++)
-		{
-			if (format[(*j) + 1] == '\0')
-			{
-				write(1, buff, *i);
-				return (-1);
-			}
-			if (format[*j + 1] == '%')
-			{
-				buff[(*i)++] = '%', flag = 1;
-				break;
-			}
-			if (conversion[a].conv_spec == format[(*j) + 1])
-			{
-				*i = conversion[a].f(conv, buff, *i, mod_flag);
-				flag = 1, mod_flag = 0;
-			}
-			if (_conv_flag(format, *j))
-				mod_flag = format[++(*j)], a--;
-		}
-		if (flag != 1)
-			buff[*i] = format[--(*j)], (*j)--, flag = 2;
-		(*j)++;
-	}
-	else
-	{
-		buff[(*i)++] = format[*j];
-		flag = 0;
-	}
-	return (0);
 }
 /**
  * _conv_flag - checks for conversion specifiers
