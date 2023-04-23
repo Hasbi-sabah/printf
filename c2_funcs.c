@@ -161,6 +161,6 @@ int conv_p(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 	}
 	temp[k++] = 'x';
 	temp[k++] = '0';
-	i = _strrev(buff, temp, i, k++);
-	return (i);
+	i = _strrev(buff, temp, i, k);
+	return (i - 2);
 }
