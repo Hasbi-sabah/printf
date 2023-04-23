@@ -72,7 +72,7 @@ int call_funcs(conv_list *conversion,
 					mod_flag = format[++j], a--;
 			}
 			if (flag != 1)
-				buff[i++] = format[--j], j--, flag = 2;
+				buff[i] = format[--j], j--, flag = 2;
 			j++;
 		}
 		else
