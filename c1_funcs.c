@@ -50,7 +50,7 @@ int conv_s(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 
 int conv_i_d(va_list conv, char *buff, int i, char f)
 {
-	int j = va_arg(conv, int), k;
+	int j = va_arg(conv, int), k, flag = 0;
 	char temp[20];
 
 	if ((f == ' ' || f == '+') && j >= 0)
@@ -60,13 +60,15 @@ int conv_i_d(va_list conv, char *buff, int i, char f)
 	if (j < 0)
 	{
 		j = -j;
-		buff[i++] = '-';
+		flag = 1;
 	}
 	for (k = 0; j > 0; k++)
 	{
 		temp[k] = j % 10 + '0';
 		j /= 10;
 	}
+	if (flag)
+		temp[k++] = '-';
 	i = _strrev(buff, temp, i, k);
 	return (i);
 }
