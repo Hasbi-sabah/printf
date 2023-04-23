@@ -39,6 +39,8 @@ int _printf(const char *format, ...)
 	i = call_funcs(conversion, conv, format, buff);
 	va_end(conv);
 	write(1, buff, i);
+	for (j = 0; j < i; j++)
+		buff[j] = 0;
 	return (i);
 }
 /**
@@ -52,7 +54,7 @@ int _printf(const char *format, ...)
 int call_funcs(conv_list *conversion,
 		va_list conv, const char *format, char *buff)
 {
-	int i, j, a, flag;
+	int i, j, a, flag = 0;
 	char mod_flag = 0;
 
 	for (i = 0, j = 0; format[j]; j++)
