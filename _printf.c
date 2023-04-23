@@ -26,9 +26,9 @@ int _printf(const char *format, ...)
 		{'\0', NULL}
 	};
 	int i, j;
-	char buff[BUFF_SIZE];
+	char buff[1024];
 
-	for (j = 0; j < BUFF_SIZE; j++)
+	for (j = 0; j < 1024; j++)
 		buff[j] = 0;
 	if (!format)
 		return (-1);
@@ -38,7 +38,6 @@ int _printf(const char *format, ...)
 	va_start(conv, format);
 	i = call_funcs(conversion, conv, format, buff);
 	va_end(conv);
-	buff[i] = 0;
 	write(1, buff, i);
 	return (i);
 }
