@@ -104,7 +104,7 @@ int conv_S(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 	int j, k, l, m;
 
 	if (!p)
-		return (write(1, "(null)", 6));
+		return (write (1, "(null)", 6));
 	_strcpy(buff, p, i);
 	for (j = 0, m = i; j < _strlen(p); j++)
 	{
