@@ -61,11 +61,13 @@ int call_funcs(conv_list *conversion,
 			{
 				if (format[j + 1] == '\0')
 					return (-1);
-				if (format[j + 1] == '%')
+				/*
+				 * if (format[j + 1] == '%')
 				{
 					buff[i++] = '%', flag = 1;
 					break;
 				}
+				*/
 				if (conversion[a].conv_spec == format[j + 1])
 				{
 					flag = 1;
