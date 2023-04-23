@@ -13,6 +13,8 @@ int conv_o(va_list conv, char *buff, int i, char f)
 	unsigned int j = va_arg(conv, unsigned int), k;
 	char temp[12];
 
+	for (k = 0; k < 12; k++)
+		temp[k] = 0;
 	if (j == 0)
 		buff[i++] = '0';
 	for (k = 0; j > 0; k++)
@@ -39,6 +41,8 @@ int conv_x(va_list conv, char *buff, int i, char f)
 	unsigned int j = va_arg(conv, unsigned int), k;
 	char temp[12];
 
+	for (k = 0; k < 12; k++)
+		temp[k] = 0;
 	if (f == '#')
 	{
 		buff[i++] = '0';
@@ -71,6 +75,8 @@ int conv_X(va_list conv, char *buff, int i, char f)
 	unsigned int j = va_arg(conv, unsigned int), k;
 	char temp[12];
 
+	for (k = 0; k < 12; k++)
+		temp[k] = 0;
 	if (f == '#')
 	{
 		buff[i++] = '0';
@@ -150,6 +156,8 @@ int conv_p(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 	int k;
 	char temp[20];
 
+	for (k = 0; k < 20; k++)
+		temp[k] = 0;
 	if (j == 0)
 	{
 		buff[i++] = '(';

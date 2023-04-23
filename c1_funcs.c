@@ -53,6 +53,8 @@ int conv_i_d(va_list conv, char *buff, int i, char f)
 	int j = va_arg(conv, int), k, flag = 0;
 	char temp[25], min[] = "-2147483648";
 
+	for (k = 0; k < 25; k++)
+		temp[k] = 0;
 	if ((f == ' ' || f == '+') && j >= 0)
 		buff[i++] = f;
 	if (j == -2147483648)
@@ -90,6 +92,8 @@ int conv_b(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 	unsigned int j = va_arg(conv, unsigned int), k;
 	char temp[65];
 
+	for (k = 0; k < 65; k++)
+		temp[k] = 0;
 	if (j == 0)
 		buff[i++] = '0';
 	for (k = 0; j > 0; k++)
@@ -115,10 +119,12 @@ int conv_u(va_list conv, char *buff, int i, char f)
 	unsigned int j = va_arg(conv, unsigned int), k;
 	char temp[20], min[] = "4294967286";
 
+	for (k = 0; k < 20; k++)
+		temp[k] = 0;
+	if (f == ' ' || f == '+')
+		buff[i++] = f;
 	if (j == 4294967286)
 	{
-		if (f == ' ' || f == '+')
-			buff[i++] = f;
 		i = _strcpy(buff, min, i);
 		return (i);
 	}
@@ -129,8 +135,6 @@ int conv_u(va_list conv, char *buff, int i, char f)
 		temp[k] = j % 10 + '0';
 		j /= 10;
 	}
-	if (f == ' ' || f == '+')
-		buff[i++] = f;
 	i = _strrev(buff, temp, i, k);
 	return (i);
 }
