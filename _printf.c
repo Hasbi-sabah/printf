@@ -55,6 +55,8 @@ int call_funcs(conv_list *conversion,
 		{
 			for (a = 0, flag = 0; conversion[a].conv_spec; a++)
 			{
+				if (format[j + 1] == '\0')
+					return (-1);
 				if (format[j + 1] == '%')
 				{
 					buff[i++] = '%', flag = 1;
@@ -67,16 +69,10 @@ int call_funcs(conv_list *conversion,
 					mod_flag = 0;
 				}
 				if (_conv_flag(format, j))
-				{
-					mod_flag = format[++j];
-					a--;
-				}
+					mod_flag = format[++j], a--;
 			}
 			if (flag != 1)
-			{
-				buff[i++] = format[--j];
-				j--, flag = 2;
-			}
+				buff[i++] = format[--j], j--, flag = 2;
 			j++;
 		}
 		else
