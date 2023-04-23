@@ -2,9 +2,9 @@
 #define MAIN_H
 
 #include <unistd.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <stdio.h>
 #define BUFF_SIZE 1024
 
 /**
@@ -29,6 +29,7 @@ int _strrev(char *dest, char *src, int i, int j);
 void _strcat(char *dest, char *src, int i);
 int _conv_flag(const char *s, int j);
 int conv_c(va_list conv, char *buff, int i, char f);
+int conv_percent(va_list conv, char *buff, int i, char f);
 int conv_s(va_list conv, char *buff, int i, char f);
 int conv_i_d(va_list conv, char *buff, int i, char f);
 int conv_b(va_list conv, char *buff, int i, char f);
