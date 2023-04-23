@@ -9,9 +9,9 @@
  * Return: length of write
  */
 
-int conv_percent(__atribute__ ((unused)) va_list conv,
+int conv_percent(__attribute__ ((unused)) va_list conv,
 		__attribute__ ((unused)) char *buff,
-		__atribute__ ((unused)) int i,
+		__attribute__ ((unused)) int i,
 		__attribute__ ((unused)) char f)
 {
 	return (write(1, "%", 1));
