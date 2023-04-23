@@ -101,5 +101,3 @@ int _conv_flag(const char *s, int j)
 		return (1);
 	return (0);
 }
-
-
