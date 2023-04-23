@@ -59,13 +59,8 @@ int call_funcs(conv_list *conversion,
 		{
 			for (a = 0, flag = 0; conversion[a].conv_spec; a++)
 			{
-				if (format[j + 1] == '\0')
+				if (format[j + 1] == '\0' && format[j - 1] != '%')
 					return (-1);
-				if (format[j + 1] == '%')
-				{
-					buff[i++] = '%', flag = 1;
-					break;
-				}
 				if (conversion[a].conv_spec == format[j + 1])
 				{
 					flag = 1;
