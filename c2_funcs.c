@@ -13,8 +13,6 @@ int conv_o(va_list conv, char *buff, int i, char f)
 	unsigned int j = va_arg(conv, unsigned int), k;
 	char temp[12];
 
-	if (f == ' ' || f == '+')
-		buff[i++] = f;
 	if (j == 0)
 		buff[i++] = '0';
 	for (k = 0; j > 0; k++)
@@ -22,6 +20,8 @@ int conv_o(va_list conv, char *buff, int i, char f)
 		temp[k] = j % 8 + '0';
 		j /= 8;
 	}
+	if (f == ' ' || f == '+')
+		temp[k++] = f;
 	i = _strrev(buff, temp, i, k);
 	return (i);
 }

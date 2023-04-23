@@ -113,10 +113,15 @@ int conv_b(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 int conv_u(va_list conv, char *buff, int i, char f)
 {
 	unsigned int j = va_arg(conv, unsigned int), k;
-	char temp[20];
+	char temp[20], min[] = "4294967286";
 
-	if (f == ' ' || f == '+')
-		buff[i++] = f;
+	if (j == 4294967286)
+	{
+		if (f == ' ' || f == '+')
+			buff[i++] = f;
+		i = _strcpy(buff, min, i);
+		return (i);
+	}
 	if (j == 0)
 		buff[i++] = '0';
 	for (k = 0; j > 0; k++)
@@ -124,6 +129,8 @@ int conv_u(va_list conv, char *buff, int i, char f)
 		temp[k] = j % 10 + '0';
 		j /= 10;
 	}
+	if (f == ' ' || f == '+')
+		buff[i++] = f;
 	i = _strrev(buff, temp, i, k);
 	return (i);
 }
