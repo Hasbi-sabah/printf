@@ -13,6 +13,7 @@ int _printf(const char *format, ...)
 	conv_list conversion[] = {
 		{'c', conv_c},
 		{'s', conv_s},
+		{'%', conv_percent},
 		{'i', conv_i_d},
 		{'d', conv_i_d},
 		{'b', conv_b},
@@ -24,15 +25,17 @@ int _printf(const char *format, ...)
 		{'p', conv_p},
 		{'\0', NULL}
 	};
-	int i;
+	int i, j;
 	char buff[BUFF_SIZE];
 
+	for (j = 0; j < BUFF_SIZE; j++)
+		buff[j] = 0;
 	if (!format)
 		return (-1);
 	va_start(conv, format);
 	i = call_funcs(conversion, conv, format, buff);
 	va_end(conv);
-	fflush(stdout);
+	buff[i] = 0;
 	write(1, buff, i);
 	return (i);
 }
@@ -57,10 +60,7 @@ int call_funcs(conv_list *conversion,
 			for (a = 0, flag = 0; conversion[a].conv_spec; a++)
 			{
 				if (format[j + 1] == '\0')
-				{
-					write(1, buff, i);
 					return (-1);
-				}
 				if (format[j + 1] == '%')
 				{
 					buff[i++] = '%', flag = 1;
