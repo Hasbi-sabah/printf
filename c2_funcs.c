@@ -100,10 +100,13 @@ int conv_X(va_list conv, char *buff, int i, char f)
  */
 int conv_S(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 {
-	char *p = va_arg(conv, char *), *p_x, temp[] = "\\x00";
-	int j, k, l;
+	char *p = va_arg(conv, char *), temp[] = "\\x00";
+	int j, k, l, m;
 
-	for (j = 0; j < _strlen(p); j++)
+	if (!p)
+		return (i);
+	_strcpy(buff, p, i);
+	for (j = 0, m = i; j < _strlen(p); j++)
 	{
 		if (p[j] < 32 || p[j] >= 127)
 		{
@@ -116,13 +119,12 @@ int conv_S(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 					temp[k] = l % 16 + '0';
 				l /= 16;
 			}
-			p_x = malloc(_strlen(p) + _strlen(temp));
-			_strcpy(p_x, p, 0);
-			_strcat(p_x, temp, j);
+			m += j;
+			_strcat(buff, temp, m);
+			m += _strlen(temp) - j - 1;
 		}
 	}
-	i = _strcpy(buff, p_x, i);
-	free(p_x);
+	i = _strlen(buff);
 	return (i);
 }
 
