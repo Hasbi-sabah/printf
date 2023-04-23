@@ -51,15 +51,20 @@ int conv_s(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 int conv_i_d(va_list conv, char *buff, int i, char f)
 {
 	int j = va_arg(conv, int), k, flag = 0;
-	char temp[20];
+	char temp[25], min[] = "-2147483648";
 
 	if ((f == ' ' || f == '+') && j >= 0)
 		buff[i++] = f;
+	if (j == -2147483648)
+	{
+		i = _strcpy(buff, min, i);
+		return (i);
+	}
 	if (j == 0)
 		buff[i++] = '0';
 	if (j < 0)
 	{
-		j = -j;
+		j = 0 - j;
 		flag = 1;
 	}
 	for (k = 0; j > 0; k++)
