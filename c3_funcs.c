@@ -14,5 +14,7 @@ int conv_percent(__attribute__ ((unused)) va_list conv,
 		__attribute__ ((unused))int i,
 		__attribute__ ((unused)) char f)
 {
-	return (write(1, "%%", 1));
+	buff[i++] = '%';
+	buff[i++] = '%';
+	return (i);
 }
