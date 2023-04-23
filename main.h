@@ -21,6 +21,8 @@ typedef struct conversion conv_list;
 int _printf(const char *format, ...);
 int call_funcs(conv_list *conversion,
 		va_list conv, const char *format, char *buff);
+int format_checker(const char *format, int *i, int *j,
+		va_list conv, char *buff, conv_list *conversion);
 int _strlen(const char *s);
 int _strcpy(char *dest, char *src, int i);
 int _strrev(char *dest, char *src, int i, int j);
