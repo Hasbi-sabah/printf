@@ -32,6 +32,9 @@ int _printf(const char *format, ...)
 		buff[j] = 0;
 	if (!format)
 		return (-1);
+	if ((format[0] == '%' && !format[1]) ||
+			(format[0] == '%' && format[1] == ' ' && !format[2]))
+		return (-1);
 	va_start(conv, format);
 	i = call_funcs(conversion, conv, format, buff);
 	va_end(conv);
@@ -59,8 +62,6 @@ int call_funcs(conv_list *conversion,
 		{
 			for (a = 0, flag = 0; conversion[a].conv_spec; a++)
 			{
-				if (format[j + 1] == '\0' && format[j - 1] != '%')
-					return (-1);
 				if (conversion[a].conv_spec == format[j + 1])
 				{
 					flag = 1;
