@@ -25,7 +25,7 @@ int _printf(const char *format, ...)
 		{'\0', NULL}
 	};
 	int i;
-	char buff[1024];
+	char buff[BUFF_SIZE];
 
 	if (!format)
 		return (-1);
