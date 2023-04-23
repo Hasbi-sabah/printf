@@ -13,7 +13,6 @@ int _printf(const char *format, ...)
 	conv_list conversion[] = {
 		{'c', conv_c},
 		{'s', conv_s},
-		{'%', conv_percent},
 		{'i', conv_i_d},
 		{'d', conv_i_d},
 		{'b', conv_b},
@@ -64,6 +63,8 @@ int call_funcs(conv_list *conversion,
 				if (format[j + 1] == '%')
 				{
 					buff[i++] = '%', flag = 1;
+					if (format[j + 2] == '%')
+						write(1, "%%", 2);
 					break;
 				}
 				if (conversion[a].conv_spec == format[j + 1])
