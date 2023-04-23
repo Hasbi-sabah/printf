@@ -2,7 +2,6 @@
 #define MAIN_H
 
 #include <unistd.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #define BUFF_SIZE 1024
