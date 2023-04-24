@@ -24,6 +24,7 @@ int _printf(const char *format, ...)
 		{'S', conv_S},
 		{'p', conv_p},
 		{'r', conv_r},
+		{'R', conv_R},
 		{'\0', NULL}
 	};
 	int i, j;

@@ -22,11 +22,15 @@ int call_funcs(conv_list *conversion,
 		va_list conv, const char *format, char *buff);
 int format_checker(const char *format, int *i, int *j,
 		va_list conv, char *buff, conv_list *conversion);
+
 int _strlen(const char *s);
 int _strcpy(char *dest, char *src, int i);
 int _strrev(char *dest, char *src, int i, int j);
 void _strcat(char *dest, char *src, int i);
+int rot13(char *buff, char *s, int a);
+
 int _conv_flag(const char *s, int j);
+
 int conv_c(va_list conv, char *buff, int i, char f);
 int conv_percent(va_list conv, char *buff, int i, char f);
 int conv_s(va_list conv, char *buff, int i, char f);
@@ -39,5 +43,6 @@ int conv_X(va_list conv, char *buff, int i, char f);
 int conv_S(va_list conv, char *buff, int i, char f);
 int conv_p(va_list conv, char *buff, int i, char f);
 int conv_r(va_list conv, char *buff, int i, char f);
+int conv_R(va_list conv, char *buff, int i, char f);
 
 #endif
