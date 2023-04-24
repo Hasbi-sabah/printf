@@ -66,3 +66,28 @@ void _strcat(char *dest, char *src, int i)
 	for (l = 0; l < k; l++)
 		dest[i + l] = src[l];
 }
+int _rot13(char *buff, char *s, int a)
+{
+	int i, j, k;
+	char og[] = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN",
+	     rot[] = "nmreglhvbcdfqstuwxyzjkpioaNMREGLHVBCDFQSTUWXYZJKPIOA";
+
+	k = _strlen(s);
+	for (i = 0; i < k; i++, a++)
+	{
+		if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
+		{
+			for (j = 0; og[j] != '\0'; j++)
+			{
+				if (s[i] == og[j])
+				{
+					buff[a] = rot[j];
+					break;
+				}
+			}
+		}
+		else
+			buff[a] = s[i];
+	}
+	return (a);
+}
