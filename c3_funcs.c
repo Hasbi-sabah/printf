@@ -12,7 +12,8 @@
 int conv_percent(__attribute__ ((unused)) va_list conv,
 		__attribute__ ((unused)) char *buff,
 		__attribute__ ((unused)) int i,
-		__attribute__ ((unused)) char f)
+		__attribute__ ((unused)) char f,
+		__attribute__ ((unused)) int w)
 {
 	buff[i++] = '%';
 	return (i);
@@ -27,7 +28,8 @@ int conv_percent(__attribute__ ((unused)) va_list conv,
  * Return: length of write
  */
 int conv_r(va_list conv, char *buff, int i,
-		__attribute__ ((unused)) char f)
+		__attribute__ ((unused)) char f,
+		__attribute__ ((unused)) int w)
 {
 	char *p = va_arg(conv, char *), s[] = "(null)";
 
@@ -50,7 +52,8 @@ int conv_r(va_list conv, char *buff, int i,
  * Return: length of write
  */
 int conv_R(va_list conv, char *buff, int i,
-		__attribute__ ((unused)) char f)
+		__attribute__ ((unused)) char f,
+		__attribute__ ((unused)) int w)
 {
 	char *p = va_arg(conv, char *), s[] = "(null)";
 

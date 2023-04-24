@@ -56,7 +56,7 @@ int _printf(const char *format, ...)
 int call_funcs(conv_list *conversion,
 		va_list conv, const char *format, char *buff)
 {
-	int i, j, a, flag = 0;
+	int i, j, a, flag = 0, width = 0;
 	char mod_flag = 0;
 
 	for (i = 0, j = 0; format[j]; j++)
@@ -68,13 +68,15 @@ int call_funcs(conv_list *conversion,
 				if (conversion[a].conv_spec == format[j + 1])
 				{
 					flag = 1;
-					i = conversion[a].f(conv, buff, i, mod_flag);
+					i = conversion[a].f(conv, buff, i, mod_flag, width);
 					mod_flag = 0;
 				}
 				if (_conv_flag(format, j))
 					mod_flag = format[++j], a--;
 				if (_length_mods(format, j))
 					j++, a--;
+				if (_field_width(format, j))
+					width = (width * 10) + (format[++j] - '0'), a--;
 			}
 			if (flag != 1)
 				buff[i] = format[--j], j--, flag = 2;
@@ -103,10 +105,17 @@ int _conv_flag(const char *s, int j)
 	return (0);
 }
 
+/**
+ * _length_mods - checks for conversion specifiers
+ * @s: string to check
+ * @j: string index
+ * Return: 1 if match, 0 is not
+ */
 
 int _length_mods(const char *s, int j)
 {
 	int h_flag = 0, hh_flag = 0, l_flag = 0;
+
 	if (s[j + 1] == 'h')
 	{
 		if (s[j + 2] == 'h')
@@ -119,6 +128,20 @@ int _length_mods(const char *s, int j)
 		l_flag = 1;
 	}
 	if (h_flag || hh_flag || l_flag)
+		return (1);
+	return (0);
+}
+
+/**
+ * _field_width - checks for conversion specifiers
+ * @s: string to check
+ * @j: string index
+ * Return: 1 if match, 0 is not
+ */
+
+int _field_width(const char *s, int j)
+{
+	if (s[j + 1] >= '0' && s[j + 1] <= '9')
 		return (1);
 	return (0);
 }

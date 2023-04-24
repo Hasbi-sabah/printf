@@ -8,20 +8,25 @@
  * @f: flag characters for non-custom conversion specifiers
  * Return: length of write
  */
-int conv_o(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
+int conv_o(va_list conv, char *buff, int i, __attribute__ ((unused)) char f, int w)
 {
 	unsigned DATA_TYPE j = va_arg(conv, unsigned DATA_TYPE), k;
+	int flag = 0;
 	char temp[12];
 
 	for (k = 0; k < 12; k++)
 		temp[k] = 0;
 	if (j == 0)
-		buff[i++] = '0';
+		flag = 1;
 	for (k = 0; j > 0; k++)
 	{
 		temp[k] = j % 8 + '0';
 		j /= 8;
 	}
+	for (w -= k; w > 0; w--)
+		buff[i++] = ' ';
+	if (flag)
+		buff[i++] = '0';
 	i = _strrev(buff, temp, i, k);
 	return (i);
 }
@@ -34,20 +39,16 @@ int conv_o(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
  * @f: flag characters for non-custom conversion specifiers
  * Return: length of write
  */
-int conv_x(va_list conv, char *buff, int i, char f)
+int conv_x(va_list conv, char *buff, int i, char f, int w)
 {
 	unsigned DATA_TYPE j = va_arg(conv, unsigned DATA_TYPE), k;
-	char temp[12];
+	int flag = 0;
+	char temp[20];
 
-	for (k = 0; k < 12; k++)
+	for (k = 0; k < 20; k++)
 		temp[k] = 0;
-	if (f == '#')
-	{
-		buff[i++] = '0';
-		buff[i++] = 'x';
-	}
 	if (j == 0)
-		buff[i++] = '0';
+		flag = 1;
 	for (k = 0; j > 0; k++)
 	{
 		if ((j % 16) > 9)
@@ -56,6 +57,15 @@ int conv_x(va_list conv, char *buff, int i, char f)
 			temp[k] = j % 16 + '0';
 		j /= 16;
 	}
+	if (flag)
+		temp[k++] = '0';
+	if (f == '#')
+	{
+		temp[k++] = 'x';
+		temp[k++] = '0';
+	}
+	for (w -= k; w > 0; w--)
+		buff[i++] = ' ';
 	i = _strrev(buff, temp, i, k);
 	return (i);
 }
@@ -68,20 +78,16 @@ int conv_x(va_list conv, char *buff, int i, char f)
  * @f: flag characters for non-custom conversion specifiers
  * Return: length of write
  */
-int conv_X(va_list conv, char *buff, int i, char f)
+int conv_X(va_list conv, char *buff, int i, char f, int w)
 {
 	unsigned DATA_TYPE j = va_arg(conv, unsigned DATA_TYPE), k;
+	int flag = 0;
 	char temp[12];
 
 	for (k = 0; k < 12; k++)
 		temp[k] = 0;
-	if (f == '#')
-	{
-		buff[i++] = '0';
-		buff[i++] = 'x';
-	}
 	if (j == 0)
-		buff[i++] = '0';
+		flag = 1;
 	for (k = 0; j > 0; k++)
 	{
 		if ((j % 16) > 9)
@@ -90,6 +96,15 @@ int conv_X(va_list conv, char *buff, int i, char f)
 			temp[k] = j % 16 + '0';
 		j /= 16;
 	}
+	if (flag)
+		temp[k++] = '0';
+	if (f == '#')
+	{
+		temp[k++] = 'x';
+		temp[k++] = '0';
+	}
+	for (w -= k; w > 0; w--)
+		buff[i++] = ' ';
 	i = _strrev(buff, temp, i, k);
 	return (i);
 }
@@ -102,7 +117,8 @@ int conv_X(va_list conv, char *buff, int i, char f)
  * @f: flag characters for non-custom conversion specifiers
  * Return: length of write
  */
-int conv_S(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
+int conv_S(va_list conv, char *buff, int i,
+		__attribute__ ((unused)) char f, __attribute__ ((unused)) int w)
 {
 	char *p = va_arg(conv, char *), temp[] = "\\x00";
 	int j, k, l, m;
@@ -148,7 +164,7 @@ int conv_S(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
  * @f: flag characters for non-custom conversion specifiers
  * Return: length of write
  */
-int conv_p(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
+int conv_p(va_list conv, char *buff, int i, __attribute__ ((unused)) char f, int w)
 {
 	unsigned long int j = va_arg(conv, unsigned long int);
 	int k;
@@ -175,6 +191,8 @@ int conv_p(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 	}
 	temp[k++] = 'x';
 	temp[k++] = '0';
+	for (w -= k; w > 0; w--)
+		buff[i++] = ' ';
 	i = _strrev(buff, temp, i, k);
 	return (i - 2);
 }
