@@ -58,6 +58,8 @@ int call_funcs(conv_list *conversion,
 	{
 		if (format[j] == '%' && flag != 2)
 		{
+			if (format[j - 1] != '%' && !format[j + 1])
+				return (-1);
 			for (a = 0, flag = 0; conversion[a].conv_spec; a++)
 			{
 				if (conversion[a].conv_spec == format[j + 1])
@@ -76,7 +78,7 @@ int call_funcs(conv_list *conversion,
 			if (flag != 1)
 				i += _putchar(format[--j]), j--, flag = 2;
 			j++;
-			if (format[j + 1] == '%')
+			if (format[j + 1] == '%' && flag == 1)
 				j--;
 		}
 		else
