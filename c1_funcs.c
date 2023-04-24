@@ -50,7 +50,7 @@ int conv_s(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 
 int conv_i_d(va_list conv, char *buff, int i, char f)
 {
-	int j = va_arg(conv, int), k, flag = 0;
+	DATA_TYPE j = va_arg(conv, DATA_TYPE), k, flag = 0;
 	char temp[25], min[] = "-2147483648";
 
 	for (k = 0; k < 25; k++)
@@ -116,7 +116,7 @@ int conv_b(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 
 int conv_u(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 {
-	unsigned int j = va_arg(conv, unsigned int), k;
+	unsigned DATA_TYPE j = va_arg(conv, unsigned DATA_TYPE), k;
 	char temp[20], min[] = "4294967286";
 
 	for (k = 0; k < 20; k++)

@@ -73,6 +73,8 @@ int call_funcs(conv_list *conversion,
 				}
 				if (_conv_flag(format, j))
 					mod_flag = format[++j], a--;
+				if (_length_mods(format, j))
+					j++, a--;
 			}
 			if (flag != 1)
 				buff[i] = format[--j], j--, flag = 2;
@@ -97,6 +99,26 @@ int _conv_flag(const char *s, int j)
 {
 	if (s[j + 1] == '#' || s[j + 1] == '+' ||
 			s[j + 1] == ' ')
+		return (1);
+	return (0);
+}
+
+
+int _length_mods(const char *s, int j)
+{
+	int h_flag = 0, hh_flag = 0, l_flag = 0;
+	if (s[j + 1] == 'h')
+	{
+		if (s[j + 2] == 'h')
+			hh_flag = 1;
+		else
+			h_flag = 1;
+	}
+	if (s[j + 1] == 'l')
+	{
+		l_flag = 1;
+	}
+	if (h_flag || hh_flag || l_flag)
 		return (1);
 	return (0);
 }

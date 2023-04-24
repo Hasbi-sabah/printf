@@ -10,7 +10,7 @@
  */
 int conv_o(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 {
-	unsigned int j = va_arg(conv, unsigned int), k;
+	unsigned DATA_TYPE j = va_arg(conv, unsigned DATA_TYPE), k;
 	char temp[12];
 
 	for (k = 0; k < 12; k++)
@@ -36,7 +36,7 @@ int conv_o(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
  */
 int conv_x(va_list conv, char *buff, int i, char f)
 {
-	unsigned int j = va_arg(conv, unsigned int), k;
+	unsigned DATA_TYPE j = va_arg(conv, unsigned DATA_TYPE), k;
 	char temp[12];
 
 	for (k = 0; k < 12; k++)
@@ -70,7 +70,7 @@ int conv_x(va_list conv, char *buff, int i, char f)
  */
 int conv_X(va_list conv, char *buff, int i, char f)
 {
-	unsigned int j = va_arg(conv, unsigned int), k;
+	unsigned DATA_TYPE j = va_arg(conv, unsigned DATA_TYPE), k;
 	char temp[12];
 
 	for (k = 0; k < 12; k++)
