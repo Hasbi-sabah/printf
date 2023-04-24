@@ -16,23 +16,6 @@ int _strlen(const char *s)
 }
 
 /**
- * _strcpy - copies the string pointed to by src to dest
- *@src: string
- *@dest: buffer
- *@i: index of starting
- * Return: i
- */
-
-int _strcpy(char *dest, char *src, int i)
-{
-	int j;
-
-	for (j = 0; src[j] != '\0'; j++, i++)
-		dest[i] = src[j];
-	return (i);
-}
-
-/**
  * _strrev - copies and reverses a string
  *@src: string
  *@dest: buffer
@@ -41,31 +24,21 @@ int _strcpy(char *dest, char *src, int i)
  * Return: i
  */
 
-int _strrev(char *dest, char *src, int i, int j)
+int _strrev(char *s, int i)
 {
-	for (; j > 0; j--, i++)
-		dest[i] = src[j - 1];
-	return (i);
+	char temp;
+	int j;
+
+	i--;
+	for (j = 0; j <= i / 2; j++)
+	{
+		temp = s[j];
+		s[j] = s[i - j];
+		s[i - j] = temp;
+	}
+	return (j);
 }
 
-/**
- * _strcat - concatenates two strings
- *@src: first string
- *@dest: second string
- *@i: index of starting
- */
-
-void _strcat(char *dest, char *src, int i)
-{
-	int j, k, l;
-
-	j = _strlen(dest);
-	k = _strlen(src);
-	for (l = j - 1; l > i; l--)
-		dest[l + k - 1] = dest[l];
-	for (l = 0; l < k; l++)
-		dest[i + l] = src[l];
-}
 
 /**
  * _rot13 - printing string using code rot13
@@ -75,14 +48,14 @@ void _strcat(char *dest, char *src, int i)
  *
  * Return: length
  */
-int _rot13(char *buff, char *s, int a)
+int _rot13(char *s)
 {
 	int i, j, k;
 	char og[] = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN",
 	     rot[] = "nmreglhvbcdfqstuwxyzjkpioaNMREGLHVBCDFQSTUWXYZJKPIOA";
 
 	k = _strlen(s);
-	for (i = 0; i < k; i++, a++)
+	for (i = 0; i < k; i++)
 	{
 		if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
 		{
@@ -90,13 +63,11 @@ int _rot13(char *buff, char *s, int a)
 			{
 				if (s[i] == og[j])
 				{
-					buff[a] = rot[j];
+					s[i] = rot[j];
 					break;
 				}
 			}
 		}
-		else
-			buff[a] = s[i];
 	}
-	return (a);
+	return (i);
 }

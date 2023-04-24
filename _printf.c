@@ -27,22 +27,17 @@ int _printf(const char *format, ...)
 		{'R', conv_R},
 		{'\0', NULL}
 	};
-	int i, j;
-	char buff[1024];
+	int i;
 
-	for (j = 0; j < 1024; j++)
-		buff[j] = '\0';
 	if (!format)
 		return (-1);
 	if ((format[0] == '%' && !format[1]) ||
 			(format[0] == '%' && format[1] == ' ' && !format[2]))
 		return (-1);
 	va_start(conv, format);
-	i = call_funcs(conversion, conv, format, buff);
+	i = call_funcs(conversion, conv, format);
 	va_end(conv);
-	write(1, buff, i);
-	for (j = 0; j < i; j++)
-		buff[j] = 0;
+	_putchar(-1);
 	return (i);
 }
 /**
@@ -54,7 +49,7 @@ int _printf(const char *format, ...)
  * Return: int
  */
 int call_funcs(conv_list *conversion,
-		va_list conv, const char *format, char *buff)
+		va_list conv, const char *format)
 {
 	int i, j, a, flag = 0, width = 0;
 	char mod_flag = 0;
@@ -68,7 +63,7 @@ int call_funcs(conv_list *conversion,
 				if (conversion[a].conv_spec == format[j + 1])
 				{
 					flag = 1;
-					i = conversion[a].f(conv, buff, i, mod_flag, width);
+					i += conversion[a].f(conv, mod_flag, width);
 					mod_flag = 0;
 				}
 				if (_conv_flag(format, j))
@@ -79,12 +74,12 @@ int call_funcs(conv_list *conversion,
 					width = (width * 10) + (format[++j] - '0'), a--;
 			}
 			if (flag != 1)
-				buff[i] = format[--j], j--, flag = 2;
+				i += _putchar(format[--j]), j--, flag = 2;
 			j++;
 		}
 		else
 		{
-			buff[i++] = format[j];
+			i += _putchar(format[j]);
 			flag = 0;
 		}
 	}

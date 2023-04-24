@@ -9,14 +9,9 @@
  * Return: length of write
  */
 
-int conv_percent(__attribute__ ((unused)) va_list conv,
-		__attribute__ ((unused)) char *buff,
-		__attribute__ ((unused)) int i,
-		__attribute__ ((unused)) char f,
-		__attribute__ ((unused)) int w)
+int conv_percent( NO_USE va_list conv, NO_USE char f, NO_USE int w)
 {
-	buff[i++] = '%';
-	return (i);
+	return (_putchar('%'));
 }
 
 /**
@@ -27,19 +22,22 @@ int conv_percent(__attribute__ ((unused)) va_list conv,
  * @f: flag characters for non-custom conversion specifiers
  * Return: length of write
  */
-int conv_r(va_list conv, char *buff, int i,
-		__attribute__ ((unused)) char f,
-		__attribute__ ((unused)) int w)
+
+int conv_r(va_list conv, NO_USE char f, NO_USE int w)
 {
 	char *p = va_arg(conv, char *), s[] = "(null)";
+	int z = 0;
 
 	if (!p)
 	{
-		i = _strcpy(buff, s, i);
-		return (i);
+		for (z = 0; s[z]; z++)
+			_putchar(s[z]);
+		return (z);
 	}
-	i = _strrev(buff, p, i, _strlen(p));
-	return (i);
+	_strrev(p,_strlen(p));
+	for (z = 0; p[z]; z++)
+		_putchar(p[z]);
+	return (z);
 }
 
 
@@ -51,17 +49,20 @@ int conv_r(va_list conv, char *buff, int i,
  * @f: flag characters for non-custom conversion specifiers
  * Return: length of write
  */
-int conv_R(va_list conv, char *buff, int i,
-		__attribute__ ((unused)) char f,
-		__attribute__ ((unused)) int w)
+
+int conv_R(va_list conv, NO_USE char f, NO_USE int w)
 {
 	char *p = va_arg(conv, char *), s[] = "(null)";
+	int z = 0;
 
 	if (!p)
 	{
-		i = _strcpy(buff, s, i);
-		return (i);
+		for (z = 0; s[z]; z++)
+			_putchar(s[z]);
+		return (z);
 	}
-	i = _rot13(buff, p, i);
-	return (i);
+	_rot13(p);
+	for (z = 0; p[z]; z++)
+		_putchar(p[z]);
+	return (z);
 }
