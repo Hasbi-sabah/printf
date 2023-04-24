@@ -23,13 +23,14 @@ int _printf(const char *format, ...)
 		{'X', conv_X},
 		{'S', conv_S},
 		{'p', conv_p},
+		{'r', conv_r},
 		{'\0', NULL}
 	};
 	int i, j;
 	char buff[1024];
 
 	for (j = 0; j < 1024; j++)
-		buff[j] = 0;
+		buff[j] = '\0';
 	if (!format)
 		return (-1);
 	if ((format[0] == '%' && !format[1]) ||

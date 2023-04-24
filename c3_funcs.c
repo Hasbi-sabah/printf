@@ -17,3 +17,17 @@ int conv_percent(__attribute__ ((unused)) va_list conv,
 	buff[i++] = '%';
 	return (i);
 }
+
+int conv_r(va_list conv, char *buff, int i,
+		__attribute__ ((unused)) char f)
+{
+	char *p = va_arg(conv, char *), s[] = "(null)";
+
+	if (!p)
+	{
+		i = _strcpy(buff, s, i);
+		return (i);
+	}
+	i = _strrev(buff, p, i, _strlen(p));
+	return (i);
+}

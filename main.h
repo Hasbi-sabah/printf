@@ -38,5 +38,6 @@ int conv_x(va_list conv, char *buff, int i, char f);
 int conv_X(va_list conv, char *buff, int i, char f);
 int conv_S(va_list conv, char *buff, int i, char f);
 int conv_p(va_list conv, char *buff, int i, char f);
+int conv_r(va_list conv, char *buff, int i, char f);
 
 #endif
