@@ -17,7 +17,7 @@ int conv_c(va_list conv, NO_USE char f, int w)
 	for (w -= 1; w > 0; w--, z++)
 		 putchar(' ');
 	_putchar(c);
-	return (z);
+	return (z + 1);
 }
 
 /**
