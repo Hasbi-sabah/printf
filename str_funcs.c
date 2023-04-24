@@ -66,6 +66,15 @@ void _strcat(char *dest, char *src, int i)
 	for (l = 0; l < k; l++)
 		dest[i + l] = src[l];
 }
+
+/**
+ * _rot13 - printing string using code rot13
+ * @buff: buffer
+ * @s: string to print
+ * @a: length
+ *
+ * Return: length
+ */
 int _rot13(char *buff, char *s, int a)
 {
 	int i, j, k;
