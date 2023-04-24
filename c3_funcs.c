@@ -59,6 +59,6 @@ int conv_R(va_list conv, char *buff, int i,
 		i = _strcpy(buff, s, i);
 		return (i);
 	}
-	i = _rot13(buff ,p, i);
+	i = _rot13(buff ,p ,i);
 	return (i);
 }
