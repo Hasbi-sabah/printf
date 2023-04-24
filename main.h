@@ -16,7 +16,7 @@ int _length_mods(const char *s, int j);
 	#define DATA_TYPE short int
 #elif HH_FLAG
 	#undef DATA_TYPE
-	#define DATA_TYPE char
+	#define DATA_TYPE short int
 #elif L_FLAG
 	#undef DATA_TYPE
 	#define DATA_TYPE long int
