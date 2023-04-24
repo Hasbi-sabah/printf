@@ -114,15 +114,13 @@ int conv_b(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
  * Return: length of write
  */
 
-int conv_u(va_list conv, char *buff, int i, char f)
+int conv_u(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 {
 	unsigned int j = va_arg(conv, unsigned int), k;
 	char temp[20], min[] = "4294967286";
 
 	for (k = 0; k < 20; k++)
 		temp[k] = 0;
-	if (f == ' ' || f == '+')
-		buff[i++] = f;
 	if (j == 4294967286)
 	{
 		i = _strcpy(buff, min, i);

@@ -8,7 +8,7 @@
  * @f: flag characters for non-custom conversion specifiers
  * Return: length of write
  */
-int conv_o(va_list conv, char *buff, int i, char f)
+int conv_o(va_list conv, char *buff, int i, __attribute__ ((unused)) char f)
 {
 	unsigned int j = va_arg(conv, unsigned int), k;
 	char temp[12];
@@ -22,8 +22,6 @@ int conv_o(va_list conv, char *buff, int i, char f)
 		temp[k] = j % 8 + '0';
 		j /= 8;
 	}
-	if (f == ' ' || f == '+')
-		temp[k++] = f;
 	i = _strrev(buff, temp, i, k);
 	return (i);
 }
