@@ -76,6 +76,8 @@ int call_funcs(conv_list *conversion,
 			if (flag != 1)
 				i += _putchar(format[--j]), j--, flag = 2;
 			j++;
+			if (format[j + 1] == '%')
+				j--;
 		}
 		else
 		{
