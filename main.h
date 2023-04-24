@@ -27,7 +27,7 @@ int _strlen(const char *s);
 int _strcpy(char *dest, char *src, int i);
 int _strrev(char *dest, char *src, int i, int j);
 void _strcat(char *dest, char *src, int i);
-int rot13(char *buff, char *s, int a);
+int _rot13(char *buff, char *s, int a);
 
 int _conv_flag(const char *s, int j);
 
