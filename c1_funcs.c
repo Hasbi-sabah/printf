@@ -3,9 +3,8 @@
 /**
  * conv_c - prints %c
  * @conv: arg
- * @buff: buff[1024]
- * @i: index
  * @f: flag characters for non-custom conversion specifiers
+ * @w: field width
  * Return: length of write
  */
 
@@ -15,7 +14,7 @@ int conv_c(va_list conv, NO_USE char f, int w)
 	int z = 0;
 
 	for (w -= 1; w > 0; w--, z++)
-		 putchar(' ');
+		_putchar(' ');
 	_putchar(c);
 	return (z + 1);
 }
@@ -23,9 +22,8 @@ int conv_c(va_list conv, NO_USE char f, int w)
 /**
  * conv_s - prints %s
  * @conv: arg
- * @buff: buff[1024]
- * @i: index
  * @f: flag characters for non-custom conversion specifiers
+ * @w: field width
  * Return: length of write
  */
 
@@ -50,15 +48,14 @@ int conv_s(va_list conv, NO_USE char f, int w)
 /**
  * conv_i_d - prints %i and %d
  * @conv: arg
- * @buff: buff[1024]
- * @i: index
  * @f: flag characters for non-custom conversion specifiers
+ * @w: field width
  * Return: length of write
  */
 
 int conv_i_d(va_list conv, char f, int w)
 {
-	DATA_TYPE j = va_arg(conv, DATA_TYPE), k, flag = 0;
+	DATA_TYPE int j = va_arg(conv, DATA_TYPE int), k, flag = 0;
 	char temp[25], min[] = "-2147483648";
 	int z = 0;
 
@@ -98,9 +95,8 @@ int conv_i_d(va_list conv, char f, int w)
 /**
  * conv_b - prints %b
  * @conv: arg
- * @buff: buff[1024]
- * @i: index
  * @f: flag characters for non-custom conversion specifiers
+ * @w: field width
  * Return: length of write
  */
 
@@ -131,15 +127,14 @@ int conv_b(va_list conv, NO_USE char f, NO_USE int w)
 /**
  * conv_u - prints %u
  * @conv: arg
- * @buff: buff[1024]
- * @i: index
  * @f: flag characters for non-custom conversion specifiers
+ * @w: field width
  * Return: length of write
  */
 
 int conv_u(va_list conv, char f, int w)
 {
-	unsigned DATA_TYPE j = va_arg(conv, unsigned DATA_TYPE), k, flag = 0;
+	unsigned DATA_TYPE int j = va_arg(conv, unsigned DATA_TYPE int), k, flag = 0;
 	char temp[20], min[] = "4294967286";
 	int z = 0;
 
@@ -157,7 +152,7 @@ int conv_u(va_list conv, char f, int w)
 	{
 		temp[k] = j % 10 + '0';
 		j /= 10;
-	} 
+	}
 	if (flag)
 		temp[k++] = '0';
 	if (f == ' ' || f == '+')

@@ -3,15 +3,14 @@
 /**
  * conv_o - prints %o
  * @conv: arg
- * @buff: buff[1024]
- * @i: index
  * @f: flag characters for non-custom conversion specifiers
+ * @w: field width
  * Return: length of write
  */
 
 int conv_o(va_list conv, NO_USE char f, int w)
 {
-	unsigned DATA_TYPE j = va_arg(conv, unsigned DATA_TYPE), k;
+	unsigned DATA_TYPE int j = va_arg(conv, unsigned DATA_TYPE int), k;
 	int flag = 0, z = 0;
 	char temp[12];
 
@@ -40,15 +39,14 @@ int conv_o(va_list conv, NO_USE char f, int w)
 /**
  * conv_x - prints %x
  * @conv: arg
- * @buff: buff[1024]
- * @i: index
  * @f: flag characters for non-custom conversion specifiers
+ * @w: field width
  * Return: length of write
  */
 
 int conv_x(va_list conv, char f, int w)
 {
-	unsigned DATA_TYPE j = va_arg(conv, unsigned DATA_TYPE), k;
+	unsigned DATA_TYPE int j = va_arg(conv, unsigned DATA_TYPE int), k;
 	int flag = 0, z = 0;
 	char temp[20];
 
@@ -82,15 +80,14 @@ int conv_x(va_list conv, char f, int w)
 /**
  * conv_X - prints %X
  * @conv: arg
- * @buff: buff[1024]
- * @i: index
  * @f: flag characters for non-custom conversion specifiers
+ * @w: field width
  * Return: length of write
  */
 
 int conv_X(va_list conv, char f, int w)
 {
-	unsigned DATA_TYPE j = va_arg(conv, unsigned DATA_TYPE), k;
+	unsigned DATA_TYPE int j = va_arg(conv, unsigned DATA_TYPE int), k;
 	int flag = 0, z = 0;
 	char temp[12];
 
@@ -124,9 +121,8 @@ int conv_X(va_list conv, char f, int w)
 /**
  * conv_S - prints %S
  * @conv: arg
- * @buff: buff[1024]
- * @i: index
  * @f: flag characters for non-custom conversion specifiers
+ * @w: field width
  * Return: length of write
  */
 
@@ -139,7 +135,7 @@ int conv_S(va_list conv, NO_USE char f, NO_USE int w)
 	{
 		for (j = 0; null[j]; j++)
 			_putchar(null[j]);
-		return(6);
+		return (6);
 	}
 	for (j = 0; p[j]; j++)
 	{
@@ -169,9 +165,8 @@ int conv_S(va_list conv, NO_USE char f, NO_USE int w)
 /**
  * conv_p - prints %p
  * @conv: arg
- * @buff: buff[1024]
- * @i: index
  * @f: flag characters for non-custom conversion specifiers
+ * @w: field width
  * Return: length of write
  */
 
@@ -187,7 +182,7 @@ int conv_p(va_list conv, NO_USE char f, int w)
 	{
 		for (j = 0; null[j]; j++)
 			_putchar(null[j]);
-		return(j);
+		return (j);
 	}
 	for (k = 2; j > 0; k++)
 	{

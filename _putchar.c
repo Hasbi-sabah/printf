@@ -1,5 +1,11 @@
 #include "main.h"
 
+/**
+ * _putchar - prints a character to stdout
+ * @c: character to be printed
+ * Return: always 1
+ */
+
 int _putchar(char c)
 {
 	static char buff[1024];

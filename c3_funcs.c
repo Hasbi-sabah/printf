@@ -3,9 +3,8 @@
 /**
  * conv_r - prints %r
  * @conv: arg
- * @buff: buff[1024]
- * @i: index
  * @f: flag characters for non-custom conversion specifiers
+ * @w: field width
  * Return: length of write
  */
 
@@ -20,7 +19,7 @@ int conv_r(va_list conv, NO_USE char f, NO_USE int w)
 			_putchar(null[z]);
 		return (z);
 	}
-	for (i = _strlen(p) - 1;_strlen(p) && i >= 0; i--, z++)
+	for (i = _strlen(p) - 1; _strlen(p) && i >= 0; i--, z++)
 		_putchar(p[i]);
 	return (z);
 }
@@ -29,9 +28,8 @@ int conv_r(va_list conv, NO_USE char f, NO_USE int w)
 /**
  * conv_R - prints %R
  * @conv: arg
- * @buff: buff[1024]
- * @i: index
  * @f: flag characters for non-custom conversion specifiers
+ * @w: field width
  * Return: length of write
  */
 

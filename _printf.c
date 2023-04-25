@@ -44,7 +44,6 @@ int _printf(const char *format, ...)
  * @conversion: struct list
  * @conv: va list
  * @format: what's to be printed
- * @buff: buffer
  * Return: int
  */
 int call_funcs(conv_list *conversion,
