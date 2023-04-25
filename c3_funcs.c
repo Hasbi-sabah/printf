@@ -12,7 +12,7 @@
 int conv_r(va_list conv, NO_USE char f, NO_USE int w)
 {
 	char *p = va_arg(conv, char *), null[] = "(null)";
-	int z = 0;
+	int i, z = 0;
 
 	if (!p)
 	{
@@ -20,9 +20,9 @@ int conv_r(va_list conv, NO_USE char f, NO_USE int w)
 			_putchar(null[z]);
 		return (z);
 	}
-	for (z = _strlen(p);_strlen(p) && z >= 0; z--)
-		_putchar(p[z]);
-	return (_strlen(p));
+	for (i = _strlen(p) - 1;_strlen(p) && i >= 0; i--, z++)
+		_putchar(p[i]);
+	return (z);
 }
 
 
