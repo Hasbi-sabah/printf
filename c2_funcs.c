@@ -132,14 +132,14 @@ int conv_X(va_list conv, char f, int w)
 
 int conv_S(va_list conv, NO_USE char f, NO_USE int w)
 {
-	char *p = va_arg(conv, char *), temp[] = "\\x00", null[] = "(nil)";
+	char *p = va_arg(conv, char *), temp[] = "\\x00", null[] = "(null)";
 	int j, k, l, z = 0;
 
 	if (!p)
 	{
 		for (j = 0; null[j]; j++)
 			_putchar(null[j]);
-		return(j);
+		return(6);
 	}
 	for (j = 0; p[j]; j++)
 	{
