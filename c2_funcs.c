@@ -132,7 +132,7 @@ int conv_X(va_list conv, char f, int w)
 
 int conv_S(va_list conv, NO_USE char f, NO_USE int w)
 {
-	char *p = va_arg(conv, char *), temp[] = "\\x00", null[] = "(null)";
+	char *p = va_arg(conv, char *), temp[] = "\\x00", null[] = "(nil)";
 	int j, k, l, z = 0;
 
 	if (!p)
@@ -179,7 +179,7 @@ int conv_p(va_list conv, NO_USE char f, int w)
 {
 	unsigned long int j = va_arg(conv, unsigned long int);
 	int k, z = 0;
-	char temp[20], null[] = "(null)";
+	char temp[20], null[] = "(nil)";
 
 	for (k = 0; k < 20; k++)
 		temp[k] = 0;
