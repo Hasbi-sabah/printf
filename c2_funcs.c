@@ -8,7 +8,7 @@
  * Return: length of write
  */
 
-int conv_o(va_list conv, NO_USE char f, int w)
+int conv_o(va_list conv, __attribute__ ((unused)) char f, int w)
 {
 	unsigned DATA_TYPE int j = va_arg(conv, unsigned DATA_TYPE int), k;
 	int flag = 0, z = 0;
@@ -126,7 +126,8 @@ int conv_X(va_list conv, char f, int w)
  * Return: length of write
  */
 
-int conv_S(va_list conv, NO_USE char f, NO_USE int w)
+int conv_S(va_list conv, __attribute__ ((unused)) char f,
+		__attribute__ ((unused)) int w)
 {
 	char *p = va_arg(conv, char *), temp[] = "\\x00", null[] = "(null)";
 	int j, k, l, z = 0;
@@ -170,7 +171,7 @@ int conv_S(va_list conv, NO_USE char f, NO_USE int w)
  * Return: length of write
  */
 
-int conv_p(va_list conv, NO_USE char f, int w)
+int conv_p(va_list conv, __attribute__ ((unused)) char f, int w)
 {
 	unsigned long int j = va_arg(conv, unsigned long int);
 	int k, z = 0;

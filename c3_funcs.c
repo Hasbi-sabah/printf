@@ -8,7 +8,8 @@
  * Return: length of write
  */
 
-int conv_r(va_list conv, NO_USE char f, NO_USE int w)
+int conv_r(va_list conv, __attribute__ ((unused)) char f,
+		__attribute__ ((unused)) int w)
 {
 	char *p = va_arg(conv, char *), null[] = "(null)";
 	int i, z = 0;
@@ -33,7 +34,8 @@ int conv_r(va_list conv, NO_USE char f, NO_USE int w)
  * Return: length of write
  */
 
-int conv_R(va_list conv, NO_USE char f, NO_USE int w)
+int conv_R(va_list conv, __attribute__ ((unused)) char f,
+		__attribute__ ((unused)) int w)
 {
 	char *p = va_arg(conv, char *), s[] = "(null)";
 	int i, j, z = 0;

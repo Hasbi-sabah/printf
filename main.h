@@ -6,19 +6,15 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#define NO_USE (__attribute__ ((unused)))
-#define DATA_TYPE int
+#define DATA_TYPE
 
 int _length_mods(const char *s, int j);
 
 #if H_FLAG
-	#undef DATA_TYPE
 	#define DATA_TYPE short
 #elif HH_FLAG
-	#undef DATA_TYPE
 	#define DATA_TYPE short
 #elif L_FLAG
-	#undef DATA_TYPE
 	#define DATA_TYPE long
 #endif
 /**
