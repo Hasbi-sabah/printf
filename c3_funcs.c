@@ -62,6 +62,11 @@ int conv_R(va_list conv, NO_USE char f, NO_USE int w)
 				}
 			}
 		}
+		else
+		{
+			_putchar(p[i]);
+			z++;
+		}
 	}
 	return (z);
 }
