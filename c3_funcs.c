@@ -20,7 +20,7 @@ int conv_r(va_list conv, NO_USE char f, NO_USE int w)
 			_putchar(null[z]);
 		return (z);
 	}
-	for (z = _strlen(p); z >= 0; z--)
+	for (z = _strlen(p);_strlen(p) && z >= 0; z--)
 		_putchar(p[z]);
 	return (_strlen(p));
 }
