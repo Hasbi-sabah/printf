@@ -141,9 +141,9 @@ int conv_S(va_list conv, NO_USE char f, NO_USE int w)
 			_putchar(null[j]);
 		return(j);
 	}
-	for (j = 0; j < _strlen(p); j++)
+	for (j = 0; p[j]; j++)
 	{
-		if (p[j] < 32 || p[j] >= 127)
+		if (p[j] > 0 && (p[j] < 32 || p[j] >= 127))
 		{
 			l = p[j];
 			for (k = 3; k != 2; k--)
