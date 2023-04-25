@@ -13,7 +13,6 @@ int _printf(const char *format, ...)
 	conv_list conversion[] = {
 		{'c', conv_c},
 		{'s', conv_s},
-		{'%', conv_percent},
 		{'i', conv_i_d},
 		{'d', conv_i_d},
 		{'b', conv_b},
@@ -75,11 +74,14 @@ int call_funcs(conv_list *conversion,
 				if (_field_width(format, j))
 					width = (width * 10) + (format[++j] - '0'), a--;
 			}
-			if (flag != 1)
-				i += _putchar(format[--j]), j--, flag = 2;
+			if (flag != 1 && format[j + 1] != '%')
+				i += _putchar(format[j]),j--, flag = 2;
+			else if (format[j + 1] == '%')
+			{
+				i += _putchar(format[j]);
+				flag = 2;
+			}
 			j++;
-			if (format[j + 1] == '%' && flag == 1)
-				j--;
 		}
 		else
 		{
