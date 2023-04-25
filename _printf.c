@@ -75,11 +75,10 @@ int call_funcs(conv_list *conversion,
 					width = (width * 10) + (format[++j] - '0'), a--;
 			}
 			if (flag != 1 && format[j + 1] != '%')
-				i += _putchar(format[j]),j--, flag = 2;
-			else if (format[j + 1] == '%')
+				i += _putchar(format[j--]), flag = 2;
+			else if (flag != 1 && format[j + 1] == '%')
 			{
 				i += _putchar(format[j]);
-				flag = 2;
 			}
 			j++;
 		}
