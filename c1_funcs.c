@@ -83,7 +83,7 @@ int conv_i_d(va_list conv, char f, int w)
 		temp[k++] = '0';
 	if (flag == 1)
 		temp[k++] = '-';
-	if ((f == ' ' || f == '+') && !flag)
+	if ((f == ' ' || f == '+') && flag != 1)
 		temp[k++] = f;
 	for (w -= k; w > 0; w--, z++)
 		_putchar(' ');
