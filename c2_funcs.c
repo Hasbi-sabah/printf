@@ -8,7 +8,7 @@
  * Return: length of write
  */
 
-int conv_o(va_list conv, __attribute__ ((unused)) char f, int w)
+int conv_o(va_list conv, char f, int w)
 {
 	unsigned DATA_TYPE int j = va_arg(conv, unsigned DATA_TYPE int), k;
 	int flag = 0, z = 0;
@@ -23,6 +23,8 @@ int conv_o(va_list conv, __attribute__ ((unused)) char f, int w)
 		temp[k] = j % 8 + '0';
 		j /= 8;
 	}
+	if (f == '#')
+		temp[k++] = '0';
 	for (w -= k; w > 0; w--, z++)
 		_putchar(' ');
 	if (flag)
