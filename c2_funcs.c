@@ -23,7 +23,7 @@ int conv_o(va_list conv, char f, int w)
 		temp[k] = j % 8 + '0';
 		j /= 8;
 	}
-	if (f == '#')
+	if (f == '#' && !flag)
 		temp[k++] = '0';
 	for (w -= k; w > 0; w--, z++)
 		_putchar(' ');
@@ -66,7 +66,7 @@ int conv_x(va_list conv, char f, int w)
 	}
 	if (flag)
 		temp[k++] = '0';
-	if (f == '#')
+	if (f == '#' && !flag)
 	{
 		temp[k++] = 'x';
 		temp[k++] = '0';
@@ -107,9 +107,9 @@ int conv_X(va_list conv, char f, int w)
 	}
 	if (flag)
 		temp[k++] = '0';
-	if (f == '#')
+	if (f == '#' && !flag)
 	{
-		temp[k++] = 'x';
+		temp[k++] = 'X';
 		temp[k++] = '0';
 	}
 	for (w -= k; w > 0; w--, z++)
