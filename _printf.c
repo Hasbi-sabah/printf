@@ -66,8 +66,10 @@ int call_funcs(conv_list *conversion,
 					i += conversion[a].f(conv, mod_flag, width);
 					mod_flag = 0;
 				}
-				if (_conv_flag(format, j))
+				if (_conv_flag(format, j) == 1)
 					mod_flag = format[++j], a--;
+				if (_conv_flag(format, j) == 2)
+					mod_flag = '+', j += 2, a--;
 				if (_length_mods(format, j))
 					j++, a--;
 				if (_field_width(format, j))
@@ -76,9 +78,7 @@ int call_funcs(conv_list *conversion,
 			if (flag != 1 && format[j + 1] != '%')
 				i += _putchar(format[j--]), flag = 2;
 			else if (flag != 1 && format[j + 1] == '%')
-			{
 				i += _putchar(format[j]);
-			}
 			j++;
 		}
 		else
@@ -98,6 +98,8 @@ int call_funcs(conv_list *conversion,
 
 int _conv_flag(const char *s, int j)
 {
+	if (s[j + 1] == '+' && s[j + 2] == ' ')
+		return (2);
 	if (s[j + 1] == '#' || s[j + 1] == '+' ||
 			s[j + 1] == ' ')
 		return (1);
